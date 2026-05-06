@@ -76,7 +76,7 @@ const WorkDetail = () => {
               <h3 className="h3 mb-3">{t.work.detail.challenges}</h3>
               <ul className="flex flex-col gap-2 text-white/70">
                 {project.challenges.map((challenge) => (
-                  <li key={challenge}>• {challenge}</li>
+                  <li key={challenge}>- {challenge}</li>
                 ))}
               </ul>
             </div>
