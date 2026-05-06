@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { Button } from "./ui/button";
+﻿import Link from "next/link";
 
 // components
 import Nav from "./Nav";
 import MobileNav from "./MobileNav";
+import LanguageToggle from "./LanguageToggle";
 
 const Header = () => {
   return (
@@ -12,16 +12,14 @@ const Header = () => {
         {/* logo */}
         <Link href="/">
           <h1 className="text-4xl font-semibold">
-            Luke<span className="text-accent">.</span>
+            Fran<span className="text-accent">.</span>
           </h1>
         </Link>
 
-        {/* desktop nav & hire me button */}
+        {/* desktop nav & language */}
         <div className="hidden xl:flex items-center gap-8">
           <Nav />
-          <Link href="/contact">
-            <Button>Hire me</Button>
-          </Link>
+          <LanguageToggle />
         </div>
 
         {/* mobile nav */}

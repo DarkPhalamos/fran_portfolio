@@ -1,27 +1,12 @@
-"use client";
+﻿"use client";
 
 import CountUp from "react-countup";
-
-const stats = [
-  {
-    num: 12,
-    text: "Years of experience",
-  },
-  {
-    num: 26,
-    text: "Projects completed",
-  },
-  {
-    num: 8,
-    text: "Technologies mastered",
-  },
-  {
-    num: 500,
-    text: "Code commits",
-  },
-];
+import { useLanguage } from "@/components/LanguageProvider";
 
 const Stats = () => {
+  const { t } = useLanguage();
+  const stats = t.stats;
+
   return (
     <section className="pt-4 pb-12 xl:pt-0 xl:pb-0">
       <div className="container mx-auto">

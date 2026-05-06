@@ -1,36 +1,16 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const links = [
-  {
-    name: "home",
-    path: "/",
-  },
-  {
-    name: "services",
-    path: "/services",
-  },
-  {
-    name: "resume",
-    path: "/resume",
-  },
-  {
-    name: "work",
-    path: "/work",
-  },
-  {
-    name: "contact",
-    path: "/contact",
-  },
-];
+import { useLanguage } from "@/components/LanguageProvider";
 
 const Nav = () => {
   const pathname = usePathname();
+  const { t } = useLanguage();
+
   return (
     <nav className="flex gap-8">
-      {links.map((link, index) => {
+      {t.nav.map((link, index) => {
         return (
           <Link
             href={link.path}

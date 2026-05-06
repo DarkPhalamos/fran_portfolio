@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,35 +14,32 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-
-const info = [
-  {
-    icon: <FaPhoneAlt />,
-    title: "Phone",
-    description: "(+40) 321 654 876",
-  },
-  {
-    icon: <FaEnvelope />,
-    title: "Email",
-    description: "youremail@gmail.com",
-  },
-  {
-    icon: <FaMapMarkerAlt />,
-    title: "Address",
-    description: "Code Corner, Tech Town 13579",
-  },
-];
+import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const Contact = () => {
+  const { t } = useLanguage();
+  const info = [
+    {
+      icon: <FaPhoneAlt />,
+      title: t.contact.info[0].title,
+      description: t.contact.info[0].description,
+    },
+    {
+      icon: <FaEnvelope />,
+      title: t.contact.info[1].title,
+      description: t.contact.info[1].description,
+    },
+  ];
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
-        transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
+        transition: { delay: 0, duration: 0.2, ease: "easeInOut" },
       }}
       className="py-6"
     >
@@ -50,41 +47,44 @@ const Contact = () => {
         <div className="flex flex-col xl:flex-row gap-[30px]">
           {/* form */}
           <div className="xl:w-[54%] order-2 xl:order-none">
-            <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
-              <h3 className="text-4xl text-accent">Let's work together</h3>
-              <p className="text-white/60">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum
-                nihil sapiente pariatur id totam.
-              </p>
+            <form
+              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <h3 className="text-4xl text-accent">{t.contact.title}</h3>
+              <p className="text-white/60">{t.contact.intro}</p>
+              <p className="text-white/40 text-sm">{t.contact.notice}</p>
               {/* input */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input type="firstname" placeholder="Firstname" />
-                <Input type="lastname" placeholder="Lastname" />
-                <Input type="email" placeholder="Email address" />
-                <Input type="phone" placeholder="Phone number" />
+                <Input type="text" placeholder={t.contact.form.firstName} />
+                <Input type="text" placeholder={t.contact.form.lastName} />
+                <Input type="email" placeholder={t.contact.form.email} />
+                <Input type="tel" placeholder={t.contact.form.phone} />
               </div>
               {/* select */}
               <Select>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a service" />
+                  <SelectValue placeholder={t.contact.form.servicePlaceholder} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>Select a service</SelectLabel>
-                    <SelectItem value="est">Web Development</SelectItem>
-                    <SelectItem value="cst">UI/UX Design</SelectItem>
-                    <SelectItem value="mst">Logo Design</SelectItem>
+                    <SelectLabel>{t.contact.form.servicePlaceholder}</SelectLabel>
+                    {t.contact.form.services.map((service) => (
+                      <SelectItem key={service.value} value={service.value}>
+                        {service.label}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
               {/* textarea */}
               <Textarea
                 className="h-[200px]"
-                placeholder="Type your message here."
+                placeholder={t.contact.form.message}
               />
               {/* btn */}
-              <Button size="md" className="max-w-40">
-                Send message
+              <Button size="md" className="max-w-40" type="submit">
+                {t.contact.form.submit}
               </Button>
             </form>
           </div>

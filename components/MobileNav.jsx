@@ -1,35 +1,16 @@
-"use client";
+﻿"use client";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
-
-const links = [
-  {
-    name: "home",
-    path: "/",
-  },
-  {
-    name: "services",
-    path: "/services",
-  },
-  {
-    name: "resume",
-    path: "/resume",
-  },
-  {
-    name: "work",
-    path: "/work",
-  },
-  {
-    name: "contact",
-    path: "/contact",
-  },
-];
+import { useLanguage } from "@/components/LanguageProvider";
+import LanguageToggle from "@/components/LanguageToggle";
 
 const MobileNav = () => {
   const pathname = usePathname();
+  const { t } = useLanguage();
+
   return (
     <Sheet>
       <SheetTrigger className="flex justify-center items-center">
@@ -40,13 +21,13 @@ const MobileNav = () => {
         <div className="mt-32 mb-40 text-center text-2xl">
           <Link href="/">
             <h1 className="text-4xl font-semibold">
-              Luke<span className="text-accent">.</span>
+              Fran<span className="text-accent">.</span>
             </h1>
           </Link>
         </div>
         {/* nav */}
         <nav className="flex flex-col justify-center items-center gap-8">
-          {links.map((link, index) => {
+          {t.nav.map((link, index) => {
             return (
               <Link
                 href={link.path}
@@ -61,6 +42,9 @@ const MobileNav = () => {
             );
           })}
         </nav>
+        <div className="mt-10 flex justify-center">
+          <LanguageToggle />
+        </div>
       </SheetContent>
     </Sheet>
   );
